@@ -1,0 +1,55 @@
+﻿@model IEnumerable<TaskManagement_api.Models.task>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@{
+    var errorMessage = TempData["ErrorMessage"] as string;
+    if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger">
+            @errorMessage
+        </div>
+    }
+}
+
+<h1>Tasks List</h1>
+<table>
+    <!-- Your task table goes here -->
+</table>
+
+
+<p>
+    <a asp-action="Create">Add New Task</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaskId)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskName)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.TaskId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.TaskId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.TaskId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
